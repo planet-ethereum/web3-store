@@ -14,10 +14,10 @@ class Store {
     this.state = {}
   }
 
-  subscribe (reducer: Function) {
-    this.contract.events.allEvents({
+  apply (action: Object, reducer: Function) {
+    this.contract.events[action.type]({
       fromBlock: 0
-    }).on('data', (e) => reducer(this.state, e.returnValues))
+    }).on('data', (e) => { this.state = reducer(this.state, e.returnValues) })
   }
 }
 

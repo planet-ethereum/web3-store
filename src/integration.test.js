@@ -1,3 +1,5 @@
+'use strict'
+
 const Web3 = require('web3')
 const Ganache = require('ganache-core')
 const Contract = require('truffle-contract')
@@ -29,7 +31,10 @@ describe('Integration', () => {
     const mock = jest.fn()
 
     const store = new Store(provider, ExampleContract.abi, example.address)
-    store.subscribe(mock)
+    const action = {
+      type: 'ValueUpdated',
+    }
+    store.apply(action, mock)
 
     await example.setValue(2, { from: accounts[0] })
 
@@ -38,7 +43,13 @@ describe('Integration', () => {
 
   it('should apply reducer', async () => {
     const store = new Store(provider, ExampleContract.abi, example.address, { value: 0 })
-    store.subscribe((state, action) => { state.value = parseInt(action.value, 10) })
+    const action = {
+      type: 'ValueUpdated',
+    }
+    store.apply(
+      action,
+      (prev, action) => Object.assign({}, prev, { value: parseInt(action.value, 10) })
+    )
     await example.setValue(2, { from: accounts[0] })
     expect(store.state.value).toEqual(2)
   })
