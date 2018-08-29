@@ -1,0 +1,42 @@
+{
+  "name": "web3-store",
+  "version": "0.1.0",
+  "description": "Store for Ethereum state and events",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel src/ -d dist/",
+    "prepublish": "npm run build",
+    "test": "jest",
+    "lint": "standard",
+    "flow": "flow"
+  },
+  "author": "Sina Mahmoodi",
+  "license": "MIT",
+  "standard": {
+    "parser": "babel-eslint",
+    "plugins": [
+      "flowtype"
+    ],
+    "envs": [
+      "jest"
+    ],
+    "ignore": [
+      "**/dist/"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
+    "bignumber.js": "^7.2.1",
+    "flow": "^0.2.3",
+    "flow-bin": "^0.79.1",
+    "ganache-core": "^2.2.1",
+    "jest": "^23.5.0",
+    "standard": "^12.0.0",
+    "truffle": "^5.0.0-beta.0",
+    "truffle-contract": "^4.0.0-beta.0"
+  },
+  "dependencies": {
+    "web3": "^1.0.0-beta.35"
+  }
+}
