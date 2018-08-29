@@ -42,13 +42,13 @@ describe('Integration', () => {
   })
 
   it('should apply reducer', async () => {
-    const store = new Store(provider, ExampleContract.abi, example.address, { value: 0 })
+    const store = new Store(provider, ExampleContract.abi, example.address)
     const action = {
       type: 'ValueUpdated',
     }
     store.apply(
       action,
-      (prev, action) => Object.assign({}, prev, { value: parseInt(action.value, 10) })
+      (prev = { value: 0 }, action) => Object.assign({}, prev, { value: parseInt(action.value, 10) })
     )
     await example.setValue(2, { from: accounts[0] })
     expect(store.state.value).toEqual(2)
