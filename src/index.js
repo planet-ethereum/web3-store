@@ -1,3 +1,7 @@
 const Store = require('./store')
+const Middleware = require('./Middleware')
 
-module.exports = Store
+module.exports = {
+  Store,
+  Middleware
+}

@@ -1,7 +1,7 @@
 # Web3 Store
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/planet-ethereum/Lobby)
 
-A library for maintaining a single source of truth for ethereum contract data and event logs.
+A library for computing state based on ethereum event logs, which lets you focus on the logic, by writing reducers.
 
 *Note:* This library is still in very early stages of development, please take extra care when using it.
 

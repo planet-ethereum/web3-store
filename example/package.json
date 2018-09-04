@@ -1,0 +1,14 @@
+{
+  "name": "example",
+  "version": "0.1.0",
+  "description": "Example for web3-store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sina Mahmoodi",
+  "license": "MIT",
+  "dependencies": {
+    "redux": "^4.0.0"
+  }
+}
