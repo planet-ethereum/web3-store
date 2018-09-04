@@ -13,10 +13,22 @@ const factory = new MiddlewareFactory(provider, {
   address: ExampleContract.networks['1536091167033'].address
 })
 
+const reducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'ETH_EVENT':
+      if (action.eventType === 'ValueUpdated') {
+        return Object.assign({}, state, {
+          value: action.data.returnValues.value
+        })
+      }
+    default:
+      return state
+  }
+}
+
 factory.init().then(async () => {
   const middleware = factory.getMiddleware()
 
-  const reducer = (state = {}, action) => state
 
   const app = combineReducers({ eth: reducer })
   const store = createStore(
@@ -26,5 +38,5 @@ factory.init().then(async () => {
 
   store.dispatch({ type: 'hi' })
   store.dispatch({ type: 'hoy' })
-  store.dispatch({ type: 'eth', method: 'setValue', value: 2 })
+  store.dispatch({ type: 'ETH_SEND', method: 'setValue', value: 2 })
 })

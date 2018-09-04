@@ -3,6 +3,9 @@
 
 const Web3 = require('web3')
 
+const ETH_EVENT = 'ETH_EVENT'
+const ETH_SEND = 'ETH_SEND'
+
 class Factory {
   web3: Web3
   contract: Object
@@ -19,12 +22,12 @@ class Factory {
 
   getMiddleware () {
     return (store: Object) => (next: Function) => {
-      const handler = (e) => store.dispatch({ type: 'eth_event', data: e })
+      const handler = (e) => store.dispatch({ type: ETH_EVENT, eventType: e.event, data: e })
       this.contract.events.allEvents({ fromBlock: 0 }).on('data', handler)
       return async (action: Object) => {
         console.log('action', action)
 
-        if (action.type === 'eth') {
+        if (action.type === ETH_SEND) {
           let gas = await this.contract.methods[action.method](action.value).estimateGas({ from: this.accounts[0] })
           this.contract.methods[action.method](action.value).send({ from: this.accounts[0], gas })
         }
